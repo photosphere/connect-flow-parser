@@ -72,12 +72,10 @@ if os.path.exists('flows.csv'):
     df.insert(0, 'Select', False)
     edited_data = st.data_editor(df)
 
-    col1, col2, col3 = st.columns([1, 1, 8])
-    with col1:
-        display_button = st.button('Display')
-        if display_button:
-            selected_rows = edited_data[edited_data['Select']].index.tolist()
-            df.loc[selected_rows].to_csv('selected_flows.csv', index=False)
+    display_button = st.button('Display')
+    if display_button:
+        selected_rows = edited_data[edited_data['Select']].index.tolist()
+        df.loc[selected_rows].to_csv('selected_flows.csv', index=False)
 
 if os.path.exists('selected_flows.csv'):
     df = pd.read_csv("selected_flows.csv")
